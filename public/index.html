@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI导演养成游戏｜赵云长坂坡七进七出</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar glass-card">
+        <div>
+          <p class="eyebrow">AI 导演养成游戏</p>
+          <h1>《赵云·长坂坡》导演修炼场</h1>
+          <p class="subtitle">
+            一边拍、一边学、一边让 DeepSeek 扮演你的监制与对戏搭子。
+          </p>
+        </div>
+
+        <section class="panel-block">
+          <h2>玩法目标</h2>
+          <ul class="feature-list">
+            <li>8 个核心关卡，围绕镜头、光影、节奏、情绪推进。</li>
+            <li>每关都要回答“刘备大哥的下一个要求”。</li>
+            <li>AI 会实时点评，并根据你的导演风格生成后续剧情。</li>
+          </ul>
+        </section>
+
+        <section class="panel-block">
+          <h2>导演成长</h2>
+          <div class="stats-grid" id="statsGrid"></div>
+        </section>
+
+        <section class="panel-block">
+          <h2>部署提示</h2>
+          <p class="small-text">
+            服务端使用 Node.js 原生 HTTP 服务，前端静态可直接访问；部署时设置环境变量
+            <code>DEEPSEEK_API_KEY</code> 即可启用 AI 互动。
+          </p>
+        </section>
+      </aside>
+
+      <main class="main-content">
+        <section class="hero glass-card">
+          <div>
+            <p class="eyebrow">当前任务</p>
+            <h2 id="stageTitle"></h2>
+            <p id="stageHook" class="stage-hook"></p>
+          </div>
+          <div class="hero-actions">
+            <button id="prevStageBtn" class="ghost-btn">上一关</button>
+            <button id="nextStageBtn" class="primary-btn">下一关</button>
+          </div>
+        </section>
+
+        <section class="game-grid">
+          <article class="glass-card detail-card">
+            <h3>关卡拆解</h3>
+            <div class="detail-list">
+              <div>
+                <span>核心问题</span>
+                <p id="coreQuestion"></p>
+              </div>
+              <div>
+                <span>教学焦点</span>
+                <p id="teachingFocus"></p>
+              </div>
+              <div>
+                <span>对下一关影响</span>
+                <p id="nextImpact"></p>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-card detail-card">
+            <h3>导演选择</h3>
+            <div id="choices" class="choice-list"></div>
+            <label class="custom-input">
+              <span>你的自由导演指令</span>
+              <textarea id="customDirection" rows="4" placeholder="例如：我要用贴地长镜头跟住赵云冲阵，让孩子的呼吸声盖过马蹄声。"></textarea>
+            </label>
+            <button id="sendDirectionBtn" class="primary-btn block-btn">提交给 AI 监制</button>
+          </article>
+        </section>
+
+        <section class="bottom-grid">
+          <article class="glass-card chat-card">
+            <div class="section-heading">
+              <h3>AI 监制互动</h3>
+              <span class="badge" id="apiStatus">检测中</span>
+            </div>
+            <div id="chatMessages" class="chat-messages"></div>
+            <form id="chatForm" class="chat-form">
+              <textarea id="chatInput" rows="3" placeholder="继续追问，比如：这一镜要不要加逆光和手持抖动？"></textarea>
+              <button type="submit" class="primary-btn">发送追问</button>
+            </form>
+          </article>
+
+          <article class="glass-card notebook-card">
+            <div class="section-heading">
+              <h3>导演手账</h3>
+              <button id="exportBtn" class="ghost-btn">导出设定</button>
+            </div>
+            <div id="notes" class="notes"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
